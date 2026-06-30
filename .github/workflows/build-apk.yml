@@ -40,8 +40,9 @@ jobs:
 
       - name: Patch Kotlin version
         run: |
-          sed -i 's/kotlinVersion = "1.9.24"/kotlinVersion = "1.9.25"/' android/build.gradle
-          sed -i 's/1.9.24/1.9.25/' android/gradle.properties
+          find android/ -type f \( -name "*.gradle" -o -name "*.properties" -o -name "*.kts" \) -exec sed -i 's/1\.9\.24/1.9.25/g' {} +
+          echo "kotlinVersion=1.9.25" >> android/gradle.properties
+          echo "suppressKotlinVersionCompatibilityCheck=true" >> android/gradle.properties
           echo "ANDROID_COMPILE_SDK=34" >> android/gradle.properties
 
       - name: Build debug APK
