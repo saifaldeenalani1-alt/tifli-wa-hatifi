@@ -38,10 +38,16 @@ jobs:
       - name: Prebuild Android project
         run: npx expo prebuild --platform android --no-install
 
+      - name: Patch Kotlin version
+        run: |
+          sed -i 's/kotlinVersion = "1.9.24"/kotlinVersion = "1.9.25"/' android/build.gradle
+          sed -i 's/1.9.24/1.9.25/' android/gradle.properties
+          echo "ANDROID_COMPILE_SDK=34" >> android/gradle.properties
+
       - name: Build debug APK
         run: |
           cd android
-          ./gradlew assembleDebug --stacktrace
+          ./gradlew assembleDebug --no-daemon
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
