@@ -16,7 +16,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 18
 
       - name: Setup Java 17
         uses: actions/setup-java@v4
@@ -28,12 +28,10 @@ jobs:
         uses: android-actions/setup-android@v3
 
       - name: Install dependencies
-        run: |
-          npm install --legacy-peer-deps
-          npm install -D tsx
+        run: npm install --legacy-peer-deps
 
       - name: Prebuild Android project
-        run: npx tsx node_modules/.bin/expo prebuild --platform android --no-install
+        run: npx expo prebuild --platform android --no-install
 
       - name: Build debug APK
         run: |
