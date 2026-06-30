@@ -24,8 +24,6 @@
       "package": "com.parentcontrol.tifliwahtifi",
       "permissions": ["VIBRATE"]
     },
-    "plugins": [
-      "expo-speech"
-    ]
+    "plugins": []
   }
 }
